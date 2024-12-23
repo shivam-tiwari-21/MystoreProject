@@ -7,7 +7,7 @@ export const useProductStore=create((set)=>({
         if (!newProduct.name||!newProduct.price||!newProduct.image) {
             return{success:false,message:"Please fill all the Fields"};
         }
-        const res=await fetch("api/products",{
+        const res=await fetch("/api/products",{
             method:"POST",
             headers:{
                 "Content-type":"application/json",
@@ -19,12 +19,12 @@ export const useProductStore=create((set)=>({
         return{success:true,message:"Product Created Successfully"};
     },
     fetchProduct: async ()=>{
-        const res=await fetch("api/products");
+        const res=await fetch("/api/products");
         const data =await res.json();
         set({products:data.data})
     },
     deleteProduct: async(pid)=>{
-        const res= await fetch(`http://localhost:3000/api/products/${pid}`,{
+        const res= await fetch(`/api/products/${pid}`,{
             method:"DELETE",
         });
         const data=await res.json();

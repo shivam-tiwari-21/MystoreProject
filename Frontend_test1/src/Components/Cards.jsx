@@ -71,7 +71,7 @@ const Cards = ({ product }) => {
     <div className="mb-9 mr-10">
 
 
-      <div className="card bg-base-100 dark:bg-base-300 w-75 lg:w-96 h-[500px] shadow-2xl border hover:scale-105 duration-300 ">
+      <div className="card bg-gray-600 dark:bg-base-300 text-white w-75 lg:w-96 h-[500px] shadow-2xl border hover:scale-105 duration-300 ">
         <figure className="h-[50%] overflow-hidden border">
           <img src={product.image} alt={product.name} className="w-full h-full object-cover"/>
         </figure>
