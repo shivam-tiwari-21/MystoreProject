@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useProductStore } from "../Store/Products";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Cards = ({ product }) => {
   const [updatedProduct, setUpdatedProduct] = useState(null);
@@ -7,6 +9,7 @@ const Cards = ({ product }) => {
 
   const { updateProduct } = useProductStore();
   const { deleteProduct } = useProductStore();
+
 
   const handleOpenModal = (product) => {
     setUpdatedProduct({ ...product }); // Create a copy to avoid mutation
@@ -28,9 +31,15 @@ const Cards = ({ product }) => {
       const { success, message } = await updateProduct(pid, updatedProduct); // Update product in store/database
       if (success) {
         setIsModalOpen(false); // Close modal after successful update
-        console.log("Product updated successfully!");
+        toast.success(message || "Product Updated successfully!", {
+          position: "top-right",
+          autoClose: 3000,
+        });
       } else {
-        console.log(message); // Error message in case of failure
+        toast.success(message || "Product could not Update!", {
+          position: "top-right",
+          autoClose: 3000,
+        }); // Error message in case of failure
       }
     } catch (error) {
       console.error("Error updating product:", error);
@@ -40,9 +49,15 @@ const Cards = ({ product }) => {
   const handleDeleteProduct = async (pid) => {
     const { success, message } = await deleteProduct(pid);
     if (success) {
-      console.log("Product deleted successfully!");
+      toast.success(message || "Product Deleted successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     } else {
-      console.log(message);
+      toast.success(message || "Product Delete unsuccessful!", {
+        position: "top-right",
+        autoClose: 3000,
+      });
     }
   };
 
@@ -52,8 +67,11 @@ const Cards = ({ product }) => {
   };
 
   return (
+    <>
     <div className="mb-9 mr-10">
-      <div className="card bg-base-300 w-75 lg:w-96 h-[500px] shadow-xl border ">
+
+
+      <div className="card bg-base-100 dark:bg-base-300 w-75 lg:w-96 h-[500px] shadow-2xl border hover:scale-105 duration-300 ">
         <figure className="h-[50%] overflow-hidden border">
           <img src={product.image} alt={product.name} className="w-full h-full object-cover"/>
         </figure>
@@ -97,10 +115,10 @@ const Cards = ({ product }) => {
                   {/* Modal Content */}
                   {updatedProduct && (
                     <>
-                      <h3 className="font-bold text-lg">Edit Product</h3>
+                      <h3 className="font-bold text-lg mb-5">Edit Product</h3>
                       <div>
                         <label className="input input-bordered flex items-center gap-2">
-                          Name
+                          Name:
                           <input
                             type="text"
                             className="grow"
@@ -113,7 +131,7 @@ const Cards = ({ product }) => {
                       </div>
                       <div>
                         <label className="input input-bordered flex items-center gap-2">
-                          Price
+                          Price:
                           <input
                             type="text"
                             className="grow"
@@ -126,7 +144,7 @@ const Cards = ({ product }) => {
                       </div>
                       <div>
                         <label className="input input-bordered flex items-center gap-2">
-                          Image
+                          Image:
                           <input
                             type="text"
                             className="grow"
@@ -183,6 +201,8 @@ const Cards = ({ product }) => {
         </div>
       </div>
     </div>
+    
+    </>
   );
 };
 
