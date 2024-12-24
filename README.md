@@ -1,7 +1,7 @@
 
 # My Store Project
 
-This is an Api based MERN stack project which allows user to create, fetch, update and delete products. It's a simple app that uses GET, POST, PUT and DELETE method basiclaly to interact with the server and the database.
+This is an Api based MERN stack project which allows user to create, fetch, update and delete products. It's a simple app that uses GET, POST, PUT and DELETE method basically to interact with the server and the database.
 
 ## Screenshots
 
